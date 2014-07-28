@@ -78,9 +78,15 @@ def check_top():
 @periodic_task(run_every=timedelta(minutes=3))
 def tweet_top():
     for words in range(14, 3, -1):
-        status = ' '.join(bot.get_most_popular(words))
-        if len(status) <= 140 and status not in bot.seen_tweets:
-            api.update_status(status=status)
-            bot.seen_tweets += [status]
+        status_text = ' '.join(bot.get_most_popular(words))
+        if (
+            status_text
+        ) and (
+            len(status_text) <= 140
+        ) and (
+            status_text not in bot.seen_tweets
+        ):
+            api.update_status(status=status_text)
+            bot.seen_tweets += [status_text]
             break
 
