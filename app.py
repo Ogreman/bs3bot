@@ -65,21 +65,22 @@ class TopTweetWatcher(SearchWatcher):
 bot = TopTweetWatcher("bristol")
 
 
-@periodic_task(run_every=timedelta(minutes=5))
+@periodic_task(run_every=timedelta(minutes=1))
 def check_tweets():
     bot.watch()
 
 
-@periodic_task(run_every=timedelta(minutes=10))
+@periodic_task(run_every=timedelta(minutes=2))
 def check_top():
     bot.calculate_most_used()
 
 
-@periodic_task(run_every=timedelta(minutes=30))
+@periodic_task(run_every=timedelta(minutes=3))
 def tweet_top():
-    for words in range(14, 0, -1):
+    for words in range(14, 3, -1):
         status = ' '.join(bot.get_most_popular(words))
-        if len(status) <= 140:
+        if len(status) <= 140 and status not in bot.seen_tweets:
             api.update_status(status=status)
+            bot.seen_tweets += [status]
             break
 
