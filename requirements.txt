@@ -1,0 +1,13 @@
+BeautifulSoup==3.2.1
+amqp==1.4.5
+anyjson==0.3.3
+beautifulsoup4==4.3.2
+billiard==3.3.0.18
+celery==3.1.13
+ez-setup==0.9
+gunicorn==19.1.0
+kombu==3.0.21
+pytz==2014.4
+redis==2.10.1
+tweepy==2.3.0
+git+git://github.com/Zulko/twittcher.git
